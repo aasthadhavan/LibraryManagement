@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aastha's Library - Management System</title>
+    <!-- Google Fonts: Sacramento (Thin Neon Cursive), Georgia (Serif Titles), Inter (Clean Sans-Serif Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sacramento&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Theme Style Sheet -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="light-theme">
+    <!-- Page Preloader -->
+    <div id="preloader" class="hidden">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification-container"></div>
+
+    <!-- Landing Page View (LocalHands Style Layout) -->
+    <div id="landing-container" class="view-container">
+        <!-- Top Navigation Bar -->
+        <nav class="landing-navbar">
+            <div class="navbar-logo brand-title-modern">
+                <i class="fa-solid fa-book-bookmark text-orange"></i>
+            </div>
+            <div class="navbar-links">
+                <a href="#services">Services</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#spaces">Library Spaces</a>
+            </div>
+            <div class="navbar-actions">
+                <button id="nav-theme-btn" class="btn-theme-toggle-nav" onclick="app.toggleTheme()" title="Toggle Theme">
+                    <i class="fa-solid fa-moon"></i>
+                </button>
+                <button class="btn btn-navy" onclick="app.showLoginModal()">Login / Sign Up</button>
+            </div>
+        </nav>
+
+        <!-- Dynamic Home Page Breadcrumb -->
+        <div class="breadcrumb-container" style="padding: 1rem 4rem; background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+            <span>Portal</span> &nbsp;&gt;&nbsp; <strong>Home</strong>
+        </div>
+
+        <!-- Hero Panel Grid -->
+        <header class="landing-hero">
+            <div class="hero-container">
+                <!-- Left Details Column -->
+                <div class="hero-left">
+                    <span class="badge-pill">Your Knowledge, Our Priority.</span>
+                    <h1 class="hero-title">Aastha's <br><span class="highlight-orange">Library.</span></h1>
+                    <p class="hero-subtitle">Welcome to the Private Sanctuary of Books. Search catalogs, manage members registry, and issue/return books seamlessly through our enterprise portal.</p>
+                    
+                    <!-- Categories Grid -->
+                    <div class="hero-categories-title">Explore Catalog Categories</div>
+                    <div class="hero-categories-grid">
+                        <div class="category-card" onclick="app.showCategoryInfo('Technology')">
+                            <div class="category-icon"><i class="fa-solid fa-laptop-code text-orange"></i></div>
+                            <div class="category-name">Technology</div>
+                        </div>
+                        <div class="category-card" onclick="app.showCategoryInfo('Fiction')">
+                            <div class="category-icon"><i class="fa-solid fa-feather-pointed text-orange"></i></div>
+                            <div class="category-name">Fiction</div>
+                        </div>
+                        <div class="category-card" onclick="app.showCategoryInfo('Science')">
+                            <div class="category-icon"><i class="fa-solid fa-flask text-orange"></i></div>
+                            <div class="category-name">Science</div>
+                        </div>
+                        <div class="category-card" onclick="app.showCategoryInfo('History')">
+                            <div class="category-icon"><i class="fa-solid fa-landmark text-orange"></i></div>
+                            <div class="category-name">History</div>
+                        </div>
+                        <div class="category-card" onclick="app.showCategoryInfo('Arts')">
+                            <div class="category-icon"><i class="fa-solid fa-palette text-orange"></i></div>
+                            <div class="category-name">Arts</div>
+                        </div>
+                        <div class="category-card" onclick="app.showCategoryInfo('Business')">
+                            <div class="category-icon"><i class="fa-solid fa-chart-line text-orange"></i></div>
+                            <div class="category-name">Business</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Graphic Column -->
+                <div class="hero-right">
+                    <img src="images/library_landing.png" alt="Library Circulation Illustration" class="hero-illustration">
+                </div>
+            </div>
+        </header>
+
+        <!-- Services Section -->
+        <section id="services" class="landing-section">
+            <div class="section-header">
+                <h2 class="section-title brand-title-modern">Our Services</h2>
+                <p class="section-subtitle">Aastha's Library offers modern digital solutions for book lovers and administrators.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-detail-card">
+                    <div class="service-detail-icon"><i class="fa-solid fa-book-open text-orange"></i></div>
+                    <h3>Catalog Indexing</h3>
+                    <p>Quick lookup of available inventories, authors, publishers, and real-time copy stock counts.</p>
+                </div>
+                <div class="service-detail-card">
+                    <div class="service-detail-icon"><i class="fa-solid fa-user-plus text-orange"></i></div>
+                    <h3>Membership Directory</h3>
+                    <p>Admin tools to register readers, track active accounts, check due dates, and update member statuses.</p>
+                </div>
+                <div class="service-detail-card">
+                    <div class="service-detail-icon"><i class="fa-solid fa-calendar-check text-orange"></i></div>
+                    <h3>Desk Circulation</h3>
+                    <p>Automated book check-outs, returns management, due-date calculations, and late-fee estimation.</p>
+                </div>
+                <div class="service-detail-card">
+                    <div class="service-detail-icon"><i class="fa-solid fa-chart-pie text-orange"></i></div>
+                    <h3>Circulation Analytics</h3>
+                    <p>Detailed KPIs representing catalog statistics, members counts, active loans, and overdue counts.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works Section -->
+        <section id="how-it-works" class="landing-section bg-light">
+            <div class="section-header">
+                <h2 class="section-title brand-title-modern">How It Works</h2>
+                <p class="section-subtitle">Simplifying catalog and circulation management in 4 quick steps.</p>
+            </div>
+            <div class="workflow-steps">
+                <div class="workflow-step">
+                    <div class="step-number">1</div>
+                    <h3>Create Admin Login</h3>
+                    <p>Register secure administrator credentials using the portal overlay to access the dashboard panel.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">2</div>
+                    <h3>Populate Inventories</h3>
+                    <p>Add books with detailed metadata (Author, Genre, ISBN, Stock counts) to index them instantly.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">3</div>
+                    <h3>Register Members</h3>
+                    <p>Enroll active library members and issue custom membership credentials for transaction checkouts.</p>
+                </div>
+                <div class="workflow-step">
+                    <div class="step-number">4</div>
+                    <h3>Circulate & Track</h3>
+                    <p>Check out volumes, record return dates, and calculate late fines dynamically ($2.00/day).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Library Spaces Section -->
+        <section id="spaces" class="landing-section">
+            <div class="section-header">
+                <h2 class="section-title brand-title-modern">Library Spaces</h2>
+                <p class="section-subtitle">Explore the state-of-the-art archives and reading zones at Aastha's Library.</p>
+            </div>
+            <div class="spaces-grid">
+                <div class="space-card">
+                    <img src="images/space_cozy.png" alt="Cozy Study Room" class="space-image">
+                    <div class="space-info">
+                         <h3>Cozy Reading Nook</h3>
+                         <p>A quiet, warm sanctuary with floor-to-ceiling volumes and study corners for focused research and classic readings.</p>
+                    </div>
+                </div>
+                <div class="space-card">
+                    <img src="images/space_grand.png" alt="Grand Archive Dome" class="space-image">
+                    <div class="space-info">
+                         <h3>Grand Archive Hall</h3>
+                         <p>Our circular dome archival wing containing multi-tier catalog shelves, historical logs, and extensive workspace setups.</p>
+                    </div>
+                </div>
+                <div class="space-card">
+                    <img src="images/space_modern.png" alt="Modern Building Front" class="space-image">
+                    <div class="space-info">
+                         <h3>Modern Reading Center</h3>
+                         <p>Our contemporary institutional wing featuring digital study terminals, glass research pods, and open-air lawns.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Clean Administrator Login Page -->
+    <div id="auth-container" class="view-container hidden">
+        <!-- Top Theme Toggle Button -->
+        <div class="auth-top-actions">
+            <button id="auth-theme-btn" class="btn-theme-toggle-nav" onclick="app.toggleTheme()" title="Toggle Theme">
+                <i class="fa-solid fa-moon"></i>
+            </button>
+        </div>
+
+        <div class="landing-hero">
+            <div class="hero-container">
+                <!-- Left Column: Form Card -->
+                <div class="hero-left">
+                    <div class="auth-card" style="width: 100%; max-width: 440px; margin: 0 auto;">
+                        <h1 class="brand-title-flat" style="margin-bottom: 0.25rem;">Aastha's Library</h1>
+                        
+                        <!-- Dynamic Auth Breadcrumb -->
+                        <div class="breadcrumb-container" style="margin-bottom: 1rem; justify-content: center; font-size: 0.8rem;">
+                            <a href="#home">Home</a> &nbsp;&gt;&nbsp; <strong id="auth-breadcrumb-active">Sign In</strong>
+                        </div>
+                        
+                        <!-- Administrator Badge -->
+                        <div class="badge-admin-portal" style="margin-bottom: 1.25rem;">
+                            <i class="fa-solid fa-shield-halved"></i> Administrator Access
+                        </div>
+                        
+                        <!-- Tab Headers -->
+                        <div class="auth-tabs">
+                            <button id="tab-login" class="auth-tab active" onclick="app.authVM.switchTab('login')">Sign In</button>
+                            <button id="tab-signup" class="auth-tab" onclick="app.authVM.switchTab('signup')">Register</button>
+                        </div>
+
+                        <!-- Login Form -->
+                        <form id="login-form" class="auth-form" onsubmit="app.authVM.handleLogin(event)">
+                            <div class="input-group">
+                                <label for="login-username"><i class="fa-solid fa-user"></i> Username</label>
+                                <input type="text" id="login-username" placeholder="Username" required autocomplete="username">
+                            </div>
+                            <div class="input-group">
+                                <label for="login-password"><i class="fa-solid fa-lock"></i> Password</label>
+                                <input type="password" id="login-password" placeholder="Password" required autocomplete="current-password">
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-block">Sign In <i class="fa-solid fa-right-to-bracket"></i></button>
+                        </form>
+
+                        <!-- Signup Form -->
+                        <form id="signup-form" class="auth-form hidden" onsubmit="app.authVM.handleSignup(event)">
+                            <div class="input-group">
+                                <label for="signup-username"><i class="fa-solid fa-user"></i> Choose Username</label>
+                                <input type="text" id="signup-username" placeholder="Username" required autocomplete="username">
+                            </div>
+                            <div class="input-group">
+                                <label for="signup-email"><i class="fa-solid fa-envelope"></i> Email Address</label>
+                                <input type="email" id="signup-email" placeholder="Email Address" required autocomplete="email">
+                            </div>
+                            <div class="input-group">
+                                <label for="signup-password"><i class="fa-solid fa-lock"></i> Password</label>
+                                <input type="password" id="signup-password" placeholder="Password" required autocomplete="new-password">
+                            </div>
+                            
+                            <!-- Fun Admin Avatar Selection -->
+                            <div class="input-group">
+                                <label><i class="fa-solid fa-user-ninja"></i> Librarian Badge</label>
+                                <div class="avatar-selector">
+                                    <div class="avatar-option active" onclick="app.authVM.selectAvatar(this, 'Bookworm')">
+                                        <span class="avatar-icon"><i class="fa-solid fa-book-open icon-pastel-blue"></i></span>
+                                        <span class="avatar-label">Bookworm</span>
+                                    </div>
+                                    <div class="avatar-option" onclick="app.authVM.selectAvatar(this, 'Speedy')">
+                                        <span class="avatar-icon"><i class="fa-solid fa-bolt icon-pastel-orange"></i></span>
+                                        <span class="avatar-label">Speedy</span>
+                                    </div>
+                                    <div class="avatar-option" onclick="app.authVM.selectAvatar(this, 'Sleuth')">
+                                        <span class="avatar-icon"><i class="fa-solid fa-magnifying-glass icon-pastel-purple"></i></span>
+                                        <span class="avatar-label">Sleuth</span>
+                                    </div>
+                                    <div class="avatar-option" onclick="app.authVM.selectAvatar(this, 'Director')">
+                                        <span class="avatar-icon"><i class="fa-solid fa-crown icon-pastel-gold"></i></span>
+                                        <span class="avatar-label">Director</span>
+                                    </div>
+                                </div>
+                                <input type="hidden" id="signup-avatar" value="Bookworm">
+                            </div>
+                            
+                            <button type="submit" class="btn btn-accent btn-block">Create Admin Account <i class="fa-solid fa-user-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Right Column: Dynamic Graphic -->
+                <div class="hero-right">
+                    <img id="auth-illustration" src="images/library_login.png" alt="Library Illustration" class="hero-illustration">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application View (Authenticated Dashboard) -->
+    <div id="main-container" class="view-container hidden">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand-title-flat-small brand-title-modern">Aastha's Library</h1>
+                <p class="role-badge"><i class="fa-solid fa-shield-halved"></i> Administrator</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#dashboard" id="nav-dashboard" class="nav-item active">
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </a>
+                <a href="#books" id="nav-books" class="nav-item">
+                    <i class="fa-solid fa-book"></i> Books Catalog
+                </a>
+                <a href="#members" id="nav-members" class="nav-item">
+                    <i class="fa-solid fa-users"></i> Members Directory
+                </a>
+                <a href="#borrow" id="nav-borrow" class="nav-item">
+                    <i class="fa-solid fa-hand-holding-hand"></i> Issue & Return
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn-theme-toggle" onclick="app.toggleTheme()">
+                    <span id="theme-icon"><i class="fa-solid fa-sun"></i></span>
+                    <span id="theme-text">Light Mode</span>
+                </button>
+                <button class="btn btn-danger btn-block" onclick="app.authVM.handleLogout()">
+                    Logout <i class="fa-solid fa-power-off"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="content-wrapper">
+            <!-- Header bar -->
+            <header class="content-header">
+                <div class="header-title">
+                    <!-- Dynamic Breadcrumb Navigation -->
+                    <div id="breadcrumb-nav" class="breadcrumb-container">
+                        <span>Portal</span> &nbsp;&gt;&nbsp; <strong>Dashboard</strong>
+                    </div>
+                    <h2 id="current-view-title">Dashboard</h2>
+                    <p class="date-text" id="live-clock"></p>
+                </div>
+                <div class="user-profile">
+                    <span>Welcome, <strong id="admin-display-name">Admin</strong></span>
+                    <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                </div>
+            </header>
+
+            <!-- Dashboard View -->
+            <section id="view-dashboard" class="app-view">
+                <!-- Metrics Panel -->
+                <div class="metrics-grid">
+                    <div class="metric-card card-cyan">
+                        <div class="metric-info">
+                            <h3>Total Books</h3>
+                            <p class="metric-value" id="stat-total-books">0</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-book-open"></i></div>
+                    </div>
+                    <div class="metric-card card-purple">
+                        <div class="metric-info">
+                            <h3>Issued Books</h3>
+                            <p class="metric-value" id="stat-issued-books">0</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-bookmark"></i></div>
+                    </div>
+                    <div class="metric-card card-orange">
+                        <div class="metric-info">
+                            <h3>Overdue Copies</h3>
+                            <p class="metric-value" id="stat-overdue-books">0</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-clock-rotate-left"></i></div>
+                    </div>
+                    <div class="metric-card card-emerald">
+                        <div class="metric-info">
+                            <h3>Active Members</h3>
+                            <p class="metric-value" id="stat-total-members">0</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-users-gear"></i></div>
+                    </div>
+                    <div class="metric-card card-gold">
+                        <div class="metric-info">
+                            <h3>Fines Collected</h3>
+                            <p class="metric-value" id="stat-total-fines">$0.00</p>
+                        </div>
+                        <div class="metric-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+                    </div>
+                </div>
+
+                <!-- Secondary Dashboard Section -->
+                <div class="dashboard-details">
+                    <div class="detail-card main-stats-chart">
+                        <h3><i class="fa-solid fa-chart-pie"></i> Circulation Overview</h3>
+                        <div class="chart-container">
+                            <div class="svg-chart-placeholder">
+                                <svg width="100%" height="200" viewBox="0 0 400 200" class="responsive-svg">
+                                    <rect x="50" y="30" width="40" height="140" fill="var(--cyan-accent)" rx="5" class="bar-anim-1"/>
+                                    <rect x="150" y="70" width="40" height="100" fill="var(--purple-accent)" rx="5" class="bar-anim-2"/>
+                                    <rect x="250" y="130" width="40" height="40" fill="var(--orange-accent)" rx="5" class="bar-anim-3"/>
+                                    <line x1="20" y1="170" x2="380" y2="170" stroke="var(--border-color)" stroke-width="2"/>
+                                    <text x="70" y="190" fill="var(--text-secondary)" text-anchor="middle" font-size="12">Total Stock</text>
+                                    <text x="170" y="190" fill="var(--text-secondary)" text-anchor="middle" font-size="12">On Loan</text>
+                                    <text x="270" y="190" fill="var(--text-secondary)" text-anchor="middle" font-size="12">Overdue</text>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="detail-card quick-actions-panel">
+                        <h3><i class="fa-solid fa-bolt"></i> Quick Operations</h3>
+                        <div class="quick-actions-grid">
+                            <button class="btn btn-cyan btn-sm" onclick="app.booksVM.openAddModal()"><i class="fa-solid fa-plus"></i> Add New Book</button>
+                            <button class="btn btn-purple btn-sm" onclick="app.membersVM.openAddModal()"><i class="fa-solid fa-user-plus"></i> Register Member</button>
+                            <button class="btn btn-orange btn-sm" onclick="app.borrowVM.openIssueForm()"><i class="fa-solid fa-hand-holding-hand"></i> Issue a Book</button>
+                            <button class="btn btn-emerald btn-sm" onclick="app.dashboardVM.refreshStats()"><i class="fa-solid fa-sync"></i> Refresh Data</button>
+                        </div>
+                        <div class="info-alert">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <p>Admin session active. Real-time fine updates will execute dynamically upon transaction entries.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Books Catalog View -->
+            <section id="view-books" class="app-view hidden">
+                <div class="control-bar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="books-search-input" placeholder="Search by Title, Author, ISBN, or Genre..." oninput="app.booksVM.handleSearch(event)">
+                    </div>
+                    <button class="btn btn-cyan" onclick="app.booksVM.openAddModal()"><i class="fa-solid fa-plus"></i> Add Book</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="books-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>ISBN</th>
+                                <th>Genre</th>
+                                <th>Location</th>
+                                <th>Available / Total</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="books-table-body">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Members Directory View -->
+            <section id="view-members" class="app-view hidden">
+                <div class="control-bar">
+                    <div class="search-box">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" id="members-search-input" placeholder="Search by name, email, phone..." oninput="app.membersVM.handleSearch(event)">
+                    </div>
+                    <button class="btn btn-purple" onclick="app.membersVM.openAddModal()"><i class="fa-solid fa-user-plus"></i> Register Member</button>
+                </div>
+
+                <div class="table-container">
+                    <table class="data-table" id="members-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Registration Date</th>
+                                <th>Status</th>
+                                <th class="text-right">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="members-table-body">
+                            <!-- Dynamic Content -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Borrow & Return View -->
+            <section id="view-borrow" class="app-view hidden">
+                <div class="borrow-panel-grid">
+                    <!-- Issue Book Card Form -->
+                    <div class="detail-card">
+                        <h3><i class="fa-solid fa-stamp"></i> Issue Book Transaction</h3>
+                        <form id="issue-book-form" onsubmit="app.borrowVM.handleIssue(event)" class="form-grid">
+                            <div class="input-group">
+                                <label for="issue-book-select">Select Book to Issue <span class="required">*</span></label>
+                                <select id="issue-book-select" required>
+                                    <option value="" disabled selected>Choose a book...</option>
+                                    <!-- Dynamic -->
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label for="issue-member-select">Select Borrowing Member <span class="required">*</span></label>
+                                <select id="issue-member-select" required>
+                                    <option value="" disabled selected>Choose a member...</option>
+                                    <!-- Dynamic -->
+                                </select>
+                            </div>
+                            <div class="form-row-2">
+                                <div class="input-group">
+                                    <label for="issue-date">Issue Date</label>
+                                    <input type="date" id="issue-date" required>
+                                </div>
+                                <div class="input-group">
+                                    <label for="due-date">Due Date <span class="required">*</span></label>
+                                    <input type="date" id="due-date" required>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-orange btn-block"><i class="fa-solid fa-check"></i> Finalize Issue</button>
+                        </form>
+                    </div>
+
+                    <!-- Open Borrow Logs List -->
+                    <div class="detail-card table-column">
+                        <h3><i class="fa-solid fa-history"></i> Current Circulation Logs</h3>
+                        <div class="table-container inline-table">
+                            <table class="data-table" id="transactions-table">
+                                <thead>
+                                    <tr>
+                                        <th>Book</th>
+                                        <th>Member</th>
+                                        <th>Issued</th>
+                                        <th>Due Date</th>
+                                        <th>Status</th>
+                                        <th>Fine</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactions-table-body">
+                                    <!-- Dynamic Content -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <!-- Book Form Modal -->
+    <div id="book-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="book-modal-title">Add New Book</h3>
+                <button class="btn-close" onclick="app.booksVM.closeModal()">&times;</button>
+            </div>
+            <form id="book-form" onsubmit="app.booksVM.handleSubmit(event)">
+                <input type="hidden" id="book-form-id">
+                <div class="input-group">
+                    <label for="book-title">Title <span class="required">*</span></label>
+                    <input type="text" id="book-title" required placeholder="The Catcher in the Rye">
+                </div>
+                <div class="input-group">
+                    <label for="book-author">Author <span class="required">*</span></label>
+                    <input type="text" id="book-author" required placeholder="J.D. Salinger">
+                </div>
+                <div class="form-row-2">
+                    <div class="input-group">
+                        <label for="book-isbn">ISBN <span class="required">*</span></label>
+                        <input type="text" id="book-isbn" required placeholder="9780316769488">
+                    </div>
+                    <div class="input-group">
+                        <label for="book-genre">Genre</label>
+                        <input type="text" id="book-genre" placeholder="Fiction">
+                    </div>
+                </div>
+                <div class="form-row-3">
+                    <div class="input-group">
+                        <label for="book-year">Publish Year</label>
+                        <input type="number" id="book-year" placeholder="1951" min="1000" max="2100">
+                    </div>
+                    <div class="input-group">
+                        <label for="book-copies">Total Copies</label>
+                        <input type="number" id="book-copies" required value="1" min="1">
+                    </div>
+                    <div class="input-group">
+                        <label for="book-location">Location Shelf</label>
+                        <input type="text" id="book-location" placeholder="Shelf A3">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="app.booksVM.closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-cyan" id="book-modal-submit">Save Book</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Member Form Modal -->
+    <div id="member-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="member-modal-title">Register Member</h3>
+                <button class="btn-close" onclick="app.membersVM.closeModal()">&times;</button>
+            </div>
+            <form id="member-form" onsubmit="app.membersVM.handleSubmit(event)">
+                <input type="hidden" id="member-form-id">
+                <div class="form-row-2">
+                    <div class="input-group">
+                        <label for="member-first-name">First Name <span class="required">*</span></label>
+                        <input type="text" id="member-first-name" required placeholder="Aastha">
+                    </div>
+                    <div class="input-group">
+                        <label for="member-last-name">Last Name <span class="required">*</span></label>
+                        <input type="text" id="member-last-name" required placeholder="Sharma">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label for="member-email">Email Address</label>
+                    <input type="email" id="member-email" placeholder="aastha@example.com">
+                </div>
+                <div class="input-group">
+                    <label for="member-phone">Phone Number</label>
+                    <input type="text" id="member-phone" placeholder="555-0100">
+                </div>
+                <div class="input-group">
+                    <label for="member-status">Membership Status</label>
+                    <select id="member-status">
+                        <option value="active">Active</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="app.membersVM.closeModal()">Cancel</button>
+                    <button type="submit" class="btn btn-purple" id="member-modal-submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Return Processing Modal -->
+    <div id="return-modal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Process Return Transaction</h3>
+                <button class="btn-close" onclick="app.borrowVM.closeReturnModal()">&times;</button>
+            </div>
+            <form id="return-form" onsubmit="app.borrowVM.handleSubmitReturn(event)">
+                <input type="hidden" id="return-record-id">
+                <div class="return-detail-item">
+                    <span>Book Title:</span>
+                    <strong id="return-display-book">Book Title Here</strong>
+                </div>
+                <div class="return-detail-item">
+                    <span>Borrower:</span>
+                    <strong id="return-display-member">Member Name Here</strong>
+                </div>
+                <div class="return-detail-item">
+                    <span>Issue Date:</span>
+                    <span id="return-display-issue-date">YYYY-MM-DD</span>
+                </div>
+                <div class="return-detail-item">
+                    <span>Due Date:</span>
+                    <span id="return-display-due-date">YYYY-MM-DD</span>
+                </div>
+                <hr class="modal-divider">
+                <div class="input-group">
+                    <label for="return-date">Return Date</label>
+                    <input type="date" id="return-date" required onchange="app.borrowVM.updateFineEstimation()">
+                </div>
+                <div class="return-fine-alert hidden" id="return-fine-box">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <div>
+                        <strong>Late Return Fine Detected:</strong>
+                        <p id="return-fine-display">$0.00 (0 days overdue)</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="app.borrowVM.closeReturnModal()">Cancel</button>
+                    <button type="submit" class="btn btn-orange">Confirm Return</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Javascript Framework Files (MVVM Architecture) -->
+    <!-- Models -->
+    <script src="js/models/authModel.js"></script>
+    <script src="js/models/bookModel.js"></script>
+    <script src="js/models/memberModel.js"></script>
+    <script src="js/models/borrowModel.js"></script>
+    
+    <!-- ViewModels -->
+    <script src="js/viewmodels/authViewModel.js"></script>
+    <script src="js/viewmodels/dashboardViewModel.js"></script>
+    <script src="js/viewmodels/booksViewModel.js"></script>
+    <script src="js/viewmodels/membersViewModel.js"></script>
+    <script src="js/viewmodels/borrowViewModel.js"></script>
+    
+    <!-- Main Orchestrator View Binders -->
+    <script src="js/app.js"></script>
+</body>
+</html>
