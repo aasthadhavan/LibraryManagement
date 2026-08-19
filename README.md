@@ -104,9 +104,3 @@ To execute the automated unit testing suite verifying schema tables, authenticat
 python test_app.py
 ```
 
-### Word Report Compilation
-To compile the academic Microsoft Word Document (`Aasthas_Library_Documentation.docx`) containing the database schemas, class files details, and connection grids:
-```bash
-python generate_docs.py
-```
-This document compiles in the root project folder, ready for direct submission.
